@@ -15,14 +15,15 @@ mycursor = mydb.cursor()  # initialises a cursor which allows you to communicate
 
 @application.route("/")
 def test():
-    self.output = []
-    self.input = list("I want a pizza box").split(" "))
-    for i in self.input:
+    output = []
+    input = list(("I want a pizza box").split(" "))
+    for i in input:
         query = ("SELECT * FROM Nouns WHERE noun='%s'" % (i))
         mycursor.execute(query) # returns all the values in the column 'noun' that match i.
         if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
-            self.output.append(i.capitalize())
-    return self.output
+            output.append(i.capitalize())
+    output = ",".join(output)
+    return output
 
 class returnNouns(Resource): #class that is a resource - for GET, PUT and DELETE requests
     def put(self): #function which is run when get request is made to the URL
