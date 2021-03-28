@@ -1,4 +1,4 @@
-from flask import Flask, request #flask is used for developing web applications
+from flask import Flask #flask is used for developing web applications
 #from flask_restful import Api, Resource, reqparse
 #import mysql.connector
 
