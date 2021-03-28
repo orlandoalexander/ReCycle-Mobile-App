@@ -16,7 +16,7 @@ mycursor = mydb.cursor()  # initialises a cursor which allows you to communicate
 @application.route("/")
 def test():
     self.output = []
-    self.input = "I want a pizza box"
+    self.input = list("I want a pizza box").split(" "))
     for i in self.input:
         query = ("SELECT * FROM Nouns WHERE noun='%s'" % (i))
         mycursor.execute(query) # returns all the values in the column 'noun' that match i.
