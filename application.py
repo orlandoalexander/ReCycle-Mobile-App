@@ -1,4 +1,6 @@
 from flask import Flask
+import os
+print(os.environ['RDS_HOSTNAME'])
 
 application = Flask(__name__)
 
