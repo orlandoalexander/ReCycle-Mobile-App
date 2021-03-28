@@ -1,4 +1,4 @@
-from flask import Flask #flask is used for developing web applications
+from flask import Flask, request #flask is used for developing web applications
 from flask_restful import Api, Resource, reqparse
 import mysql.connector
 
@@ -36,6 +36,7 @@ class returnNouns(Resource): #class that is a resource - for GET, PUT and DELETE
                 self.output.append(i.capitalize())
         self.output = ",".join(self.output)
         return self.output
+
 
 
 api.add_resource(returnNouns, "/nouns") #adds the class 'returnNouns' to the Api as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
