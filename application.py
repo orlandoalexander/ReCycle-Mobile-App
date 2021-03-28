@@ -6,5 +6,5 @@ application = Flask(__name__)
 
 @application.route("/")
 def test():
-    return "It works!"
+    return ("It works!"+(os.environ['RDS_HOSTNAME']))
 
