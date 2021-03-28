@@ -26,7 +26,7 @@ class returnNouns(Resource): #class that is a resource - for GET, PUT and DELETE
             mycursor.execute(query) # returns all the values in the column 'noun' that match i.
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
                 self.output.append(i.capitalize())
-        self.output = ",".join(self.output)
+        self.output = ", ".join(self.output)
         return self.output
 
 
