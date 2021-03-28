@@ -13,7 +13,7 @@ passwd = "B3rkham5t3d"
 #mycursor = mydb.cursor()  # initialises a cursor which allows you to communicate with mydb (MySQL database)
 
 
-@appplication.route("/")
+@application.route("/")
 def test():
     return "It works!"
 
@@ -33,4 +33,4 @@ def test():
 #api.add_resource(returnNouns, "/nouns") #adds the class 'returnNouns' to the Api as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
 
 if __name__ == "__main__":
-    appplication.run(debug=True) #begins running the Api server
+    application.run(debug=True) #begins running the Api server
