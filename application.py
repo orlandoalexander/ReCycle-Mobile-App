@@ -2,8 +2,8 @@ from flask import Flask #flask is used for developing web applications
 #from flask_restful import Api, Resource, reqparse
 #import mysql.connector
 
-appplication = Flask(__name__)
-#api = Api(appplication) #wrap app in restful Api
+application = Flask(__name__)
+#api = Api(application) #wrap app in restful Api
 
 host = "aaq2ah44zclimt.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
 user = "orlandoalexander"
