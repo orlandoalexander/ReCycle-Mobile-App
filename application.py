@@ -5,7 +5,7 @@ import mysql.connector
 application = Flask(__name__)
 api = Api(application) #wrap app in restful Api
 
-host = "aaq2ah44zclimt.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
+host = "aaq2ah44zclim.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
 user = "orlandoalexander"
 passwd = "B3rkham5t3d"
 
