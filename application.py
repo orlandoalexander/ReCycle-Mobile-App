@@ -16,7 +16,7 @@ mycursor = mydb.cursor()  # initialises a cursor which allows you to communicate
 @application.route("/")
 def test():
     input = "test"
-    query = ("SELECT * FROM Nouns WHERE noun='%s'" % (i))
+    query = ("SELECT * FROM Nouns WHERE noun='%s'" % (input))
     mycursor.execute(query) # returns all the values in the column 'noun' that match i.
     if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
         output = "Yes"
