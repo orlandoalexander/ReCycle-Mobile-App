@@ -24,7 +24,7 @@ def test():
         output = "No"
     try:
         return output
-    else:
+    except:
         return input
 
 class returnNouns(Resource): #class that is a resource - for GET, PUT and DELETE requests
