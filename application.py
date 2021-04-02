@@ -26,13 +26,17 @@ def test():
 
 class returnNouns(Resource): #class that is a resource - for GET, PUT and DELETE requests
     def post(self): #function which is run when get request is made to the URL
+        apostrophe = "'"
         self.output = []
         self.input = list((request.form["input"]).split(" ")) #self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
         for i in self.input:
-            query = ("SELECT * FROM Nouns WHERE noun='%s'" % (i))
-            mycursor.execute(query) # returns all the values in the column 'noun' that match i.
-            if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
-                self.output.append(i.capitalize())
+            if apostrophe in i:
+                pass
+            else:
+                query = ("SELECT * FROM Nouns WHERE noun='%s'" % (i))
+                mycursor.execute(query) # returns all the values in the column 'noun' that match i.
+                if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
+                    self.output.append(i.capitalize())
         self.output = ", ".join(self.output)
         return self.output
 
