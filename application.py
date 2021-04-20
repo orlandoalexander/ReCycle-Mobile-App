@@ -30,7 +30,7 @@ class RecyclingInfo():
     def noun_finder(self, input):
         self.keywords = []
         for word in input:
-            query = ("SELECT * FROM Nouns WHERE Noun ='%s'" % (word))
+            query = ("SELECT * FROM Keywords WHERE Keyword ='%s'" % (word))
             mycursor.execute(query) # returns all the values in the column 'noun' that match i.
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
                 synonym_list = self.synonym_finder(word)
