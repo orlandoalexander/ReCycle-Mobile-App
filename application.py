@@ -54,7 +54,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
 
     def get_category(self):
         for key in self.nouns:
-            print(key)
+            key = "Bottle"
             mycursor.execute("SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' LIMIT 1" % ("Dacorum", key.capitalize()))  # executes query to find the main category type of the user's item. Limit 1 ensures that the results do not flow into the next execution of the db cursor, which would cause an Unread Result Found error
             if mycursor.fetchone() != None:  # if the query returns a result, this result will be stored in the variable 'self.item_type'
                 #return key
