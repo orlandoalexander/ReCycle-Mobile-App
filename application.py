@@ -74,6 +74,8 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
                             self.recyclable = False
                             if result2 != None:
                                 self.extraInfo = result2[1]
+        return self.extraInfo
+        
 
 
 
