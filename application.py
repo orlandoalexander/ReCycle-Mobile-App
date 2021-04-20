@@ -62,19 +62,16 @@ class RecyclingInfo():
 
 
     def get_category(self):
-        print(self.keywords)
         for key in self.keywords:
             mycursor.execute("SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' LIMIT 1" % ("Dacorum", key.capitalize()))  # executes query to find the main category type of the user's item. Limit 1 ensures that the results do not flow into the next execution of the db cursor, which would cause an Unread Result Found error
             if mycursor.fetchone() != None:  # if the query returns a result, this result will be stored in the variable 'self.item_type'
                 self.keywords.remove(key)
-                print(key)
                 self.itemMainType = key
                 for key in self.keywords:
                     mycursor.execute(
                         "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
                         "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
                     result1 = mycursor.fetchone()
-                    print(result1)
                     if result1 != None:
                         print(result1)
                         mycursor.execute("SELECT * FROM ExtraInfo WHERE `County/Type` = '%s' LIMIT 1" % ("Dacorum/Bottle"))
