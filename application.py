@@ -67,24 +67,26 @@ class RecyclingInfo():
             if mycursor.fetchone() != None:  # if the query returns a result, this result will be stored in the variable 'self.item_type'
                 self.keywords.remove(key)
                 self.itemMainType = key
-                for key in self.keywords:
-                    mycursor.execute(
-                        "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
-                        "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
-                    result1 = mycursor.fetchone()
-                    if result1 != None:
-                        print(result1)
-                        mycursor.execute("SELECT * FROM ExtraInfo WHERE `County/Type` = '%s' LIMIT 1" % ("Dacorum/Bottle"))
-                        result2 = mycursor.fetchone()
-                        print(result2)
-                        if result1[3] == "Y":
-                            self.reyclable = True
-                            if result2 != None:
-                                self.extraInfo = result2[2]
-                        else:
-                            self.recyclable = False
-                            if result2 != None:
-                                self.extraInfo = result2[1]
+                break
+        for key in self.keywords:
+            mycursor.execute(
+                "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
+                "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
+            result1 = mycursor.fetchone()
+            if result1 != None:
+                print(result1)
+                break
+        mycursor.execute("SELECT * FROM ExtraInfo WHERE `County/Type` = '%s' LIMIT 1" % ("Dacorum/Bottle"))
+        result2 = mycursor.fetchone()
+        print(result2)
+        if result1[3] == "Y":
+            self.reyclable = True
+            if result2 != None:
+                self.extraInfo = result2[2]
+        else:
+            self.recyclable = False
+            if result2 != None:
+                self.extraInfo = result2[1]
         return self.extraInfo
         
 
