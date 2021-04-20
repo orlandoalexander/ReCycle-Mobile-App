@@ -28,7 +28,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
         
         
 class RecyclingInfo():
-    def noun_finder(self, input)
+    def noun_finder(self, input):
         for word in self.input:
             query = ("SELECT * FROM Nouns WHERE Noun ='%s'" % (word))
             mycursor.execute(query) # returns all the values in the column 'noun' that match i.
