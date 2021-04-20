@@ -73,9 +73,8 @@ class RecyclingInfo():
                     mycursor.execute(
                         "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
                         "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
-                    result1 = mycursor.fetchone()
-                    return (result1)
                     if result1 != None:
+                        print(result1)
                         mycursor.execute("SELECT * FROM ExtraInfo WHERE `County/Type` = '%s' LIMIT 1" % ("Dacorum/Bottle"))
                         result2 = mycursor.fetchone()
                         print(result2)
@@ -87,7 +86,7 @@ class RecyclingInfo():
                             self.recyclable = False
                             if result2 != None:
                                 self.extraInfo = result2[1]
-        #return self.extraInfo
+        return self.extraInfo
         
 
 
