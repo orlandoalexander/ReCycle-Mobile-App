@@ -28,14 +28,14 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
         
 class RecyclingInfo():
     def noun_finder(self, input):
-        self.nouns = []
+        self.keywords = []
         for word in input:
             query = ("SELECT * FROM Nouns WHERE Noun ='%s'" % (word))
             mycursor.execute(query) # returns all the values in the column 'noun' that match i.
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
                 synonym_list = self.synonym_finder(word)
-                self.nouns.append(word)
-                self.nouns.extend(synonym_list)
+                self.keywords.append(word)
+                self.keywords.extend(synonym_list)
             else:
                 pass
         return (self.get_category())
@@ -62,14 +62,14 @@ class RecyclingInfo():
 
 
     def get_category(self):
-        print(self.nouns)
-        for key in self.nouns:
+        print(self.keywords)
+        for key in self.keywords:
             mycursor.execute("SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' LIMIT 1" % ("Dacorum", key.capitalize()))  # executes query to find the main category type of the user's item. Limit 1 ensures that the results do not flow into the next execution of the db cursor, which would cause an Unread Result Found error
             if mycursor.fetchone() != None:  # if the query returns a result, this result will be stored in the variable 'self.item_type'
-                self.nouns.remove(key)
+                self.keywords.remove(key)
                 print(key)
                 self.itemMainType = key
-                for key in self.nouns:
+                for key in self.keywords:
                     mycursor.execute(
                         "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
                         "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
