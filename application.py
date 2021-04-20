@@ -23,7 +23,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
         self.input = list((request.form["input"]).split(" ")) #self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
         self.county = request.form["county"]
         for word in self.input:
-            query = ("SELECT * FROM Nouns WHERE noun='%s'" % (word))
+            query = ("SELECT * FROM Nouns WHERE Noun ='%s'" % (word))
             mycursor.execute(query) # returns all the values in the column 'noun' that match i.
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
                 synonym_list = self.synonym_finder(word)
