@@ -23,16 +23,23 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
         self.nouns = []
         self.input = list((request.form["input"]).split(" ")) #self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
         self.county = request.form["county"]
+        data = RecyclingInfo.noun_finder(self.input)
+        return data
+        
+        
+class RecyclingInfo():
+    def noun_finder(self, input)
         for word in self.input:
             query = ("SELECT * FROM Nouns WHERE Noun ='%s'" % (word))
             mycursor.execute(query) # returns all the values in the column 'noun' that match i.
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
                 synonym_list = self.synonym_finder(word)
-                for synonym in synonym_list:
-                    self.nouns.extend(synonym)
+                self.nouns.append(word)
+                self.nouns.extend(synonym_list)
             else:
                 pass
-        return self.get_category()
+        return (self.get_category())
+
 
     def synonym_finder(self, word):
         self.synonym_list = []
@@ -50,14 +57,14 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
                         "text"])  # prints the synonyms returned by the api
         else:
             pass
-        return (self.synonym_list)
+        
+        return self.synonym_list
+
 
     def get_category(self):
         for key in self.nouns:
-            key = "Bottle"
             mycursor.execute("SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' LIMIT 1" % ("Dacorum", key.capitalize()))  # executes query to find the main category type of the user's item. Limit 1 ensures that the results do not flow into the next execution of the db cursor, which would cause an Unread Result Found error
             if mycursor.fetchone() != None:  # if the query returns a result, this result will be stored in the variable 'self.item_type'
-                #return key
                 self.nouns.remove(key)
                 self.itemMainType = key
                 for key in self.nouns:
