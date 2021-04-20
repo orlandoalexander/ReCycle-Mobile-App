@@ -32,7 +32,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
                     self.nouns.append(synonym)
             else:
                 pass
-        self.get_category()
+        return self.get_category()
 
     def synonym_finder(self, word):
         self.synonym_list = []
@@ -59,12 +59,10 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
                 self.nouns.remove(key)
                 self.itemMainType = key
                 for key in self.nouns:
-                    print(key)
                     mycursor.execute(
                         "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
                         "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
                     result1 = mycursor.fetchone()
-                    print(result1)
                     if result1 != None:
                         mycursor.execute("SELECT * FROM ExtraInfo WHERE `County/Type` = '%s' LIMIT 1" % ("Dacorum/Bottle"))
                         result2 = mycursor.fetchone()
@@ -77,7 +75,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
                             self.recyclable = False
                             if result2 != None:
                                 self.extraInfo = result2[1]
-        return self.extraInfo
+        return result1
         
 
 
