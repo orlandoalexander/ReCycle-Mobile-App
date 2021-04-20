@@ -1,7 +1,6 @@
 from flask import Flask, request #flask is used for developing web applications
 from flask_restful import Api, Resource, reqparse
 import mysql.connector
-import requests
 
 application = Flask(__name__)
 api = Api(application) #wrap app in restful Api
