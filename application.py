@@ -29,7 +29,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
                 synonym_list = self.synonym_finder(word)
                 for synonym in synonym_list:
-                    self.nouns.append(synonym)
+                    self.nouns.extend(synonym)
             else:
                 pass
         return self.get_category()
