@@ -5,9 +5,9 @@ import mysql.connector
 application = Flask(__name__)
 api = Api(application) #wrap app in restful Api
 
-host = "aaq2ah44zclim.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
+host = "aa1vi5r7zrnde8p.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
 user = "orlandoalexander"
-passwd = "B3rkham5t3d"
+passwd = "R3cycl3App"
 
 mydb = mysql.connector.connect(host=host, user=user, passwd=passwd, database="ebdb")  # initialises the database
 mycursor = mydb.cursor()  # initialises a cursor which allows you to communicate with mydb (MySQL database)
