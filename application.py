@@ -73,13 +73,11 @@ class RecyclingInfo():
                 "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
                 "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
             result1 = mycursor.fetchone()
-            print(result1)
             if result1 != None:
                 print(result1)
                 break
         mycursor.execute("SELECT * FROM ExtraInfo WHERE `County/Type` = '%s' LIMIT 1" % ("Dacorum/Bottle"))
         result2 = mycursor.fetchone()
-        print(result2)
         if result1[3] == "Y":
             self.reyclable = True
             if result2 != None:
