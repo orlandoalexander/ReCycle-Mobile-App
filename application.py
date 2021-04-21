@@ -73,7 +73,7 @@ class RecyclingInfo():
                 "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
                 "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
             result1 = mycursor.fetchone()
-            print(results1)
+            print(result1)
             if result1 != None:
                 print(result1)
                 break
