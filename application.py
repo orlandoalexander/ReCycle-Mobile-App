@@ -31,7 +31,7 @@ class RecyclingInfo():
         self.keywords = []
         for word in input:
             query = ("SELECT * FROM Keywords WHERE Keyword ='%s'" % (word))
-            mycursor.execute(query) # returns all the values in the column 'noun' that match i.
+            mycursor.execute(query) # returns all the values in the column 'Keyword' that match 'word'.
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
                 synonym_list = self.synonym_finder(word)
                 self.keywords.append(word)
