@@ -28,6 +28,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
         
 class RecyclingInfo():
     def noun_finder(self, input):
+        print(input)
         self.keywords = []
         for word in input:
             query = ("SELECT * FROM Keywords WHERE Keyword ='%s'" % (word))
