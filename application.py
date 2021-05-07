@@ -6,7 +6,7 @@ import requests
 application = Flask(__name__)
 api = Api(application) #wrap app in restful Api
 
-host = "aa1vi5r7zrnde8p.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
+host = "aa1xyc61stz02ca.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
 user = "orlandoalexander"
 passwd = "RecycleApp"
 
