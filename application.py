@@ -92,7 +92,7 @@ class RecyclingInfo():
 
 
 
-api.add_resource(returnRecyclingInfo, "/ReyclingInfo") #adds the class 'returnNouns' to the API as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
+api.add_resource(returnRecyclingInfo, "/RecyclingInfo") #adds the class 'returnNouns' to the API as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
 
 if __name__ == "__main__":  # if the name of the file is the main program (not a module imported from another file)
     application.run(debug=True) #begins running the Api server
