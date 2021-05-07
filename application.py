@@ -22,9 +22,8 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
     def post(self): #function which is run when get request is made to the URL
         self.input = list((request.form["input"]).split(" ")) #self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
         self.county = request.form["county"]
-        #data = RecyclingInfo().noun_finder(self.input)
-        print("hello")
-        return "hello"
+        data = RecyclingInfo().noun_finder(self.input)
+        return data
         
         
 class RecyclingInfo():
