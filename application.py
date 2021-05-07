@@ -22,15 +22,16 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
     def post(self): #function which is run when get request is made to the URL
         self.input = list((request.form["input"]).split(" ")) #self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
         self.county = request.form["county"]
+        print(self.input)
         data = RecyclingInfo().noun_finder(self.input)
         return data
         
         
 class RecyclingInfo():
     def noun_finder(self, input):
-        print(self.input)
+        print(input)
         self.keywords = []
-        for word in self.input:
+        for word in input:
             query = ("SELECT * FROM Keywords WHERE Keyword ='%s'" % (word))
             mycursor.execute(query) # returns all the values in the column 'Keyword' that match 'word'.
             if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
