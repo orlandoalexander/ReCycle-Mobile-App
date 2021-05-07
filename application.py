@@ -95,4 +95,4 @@ class RecyclingInfo():
 
 api.add_resource(returnRecyclingInfo, "/ReyclingInfo") #adds the class 'returnNouns' to the API as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
 
-application.run() #begins running the Api server
+application.run(debug=True) #begins running the Api server
