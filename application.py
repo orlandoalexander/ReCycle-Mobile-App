@@ -23,7 +23,7 @@ class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT an
         self.input = list((request.form["input"]).split(" ")) #self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
         self.county = request.form["county"]
         data = RecyclingInfo().noun_finder(self.input)
-        return data
+        return "hello"
         
         
 class RecyclingInfo():
@@ -92,7 +92,7 @@ class RecyclingInfo():
 
 
 
-api.add_resource(returnRecyclingInfo, "/ReyclingInfo") #adds the class 'returnNouns' to the Api as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
+api.add_resource(returnRecyclingInfo, "/ReyclingInfo") #adds the class 'returnNouns' to the API as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
 
 if __name__ == "__main__":
     application.run(debug=True) #begins running the Api server
