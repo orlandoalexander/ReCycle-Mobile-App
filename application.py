@@ -1,10 +1,10 @@
-from flask import Flask, request #flask is used for developing web applications
+from flask import Flask, request  # flask is used for developing web applications
 from flask_restful import Api, Resource, reqparse
 import mysql.connector
 import requests
 
 application = Flask(__name__)
-api = Api(application) #wrap app in restful Api
+api = Api(application)  # wrap app in restful Api
 
 host = "aa1xyc61stz02ca.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
 user = "orlandoalexander"
@@ -18,29 +18,34 @@ mycursor = mydb.cursor()  # initialises a cursor which allows you to communicate
 def test():
     return "Working"
 
-class returnRecyclingInfo(Resource): #class that is a resource - for GET, PUT and DELETE requests
-    def post(self): #function which is run when get request is made to the URL
-        self.input = list((request.form["input"]).split(" ")) #self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
+
+class returnRecyclingInfo(Resource):  # class that is a resource - for GET, PUT and DELETE requests
+    def post(self):  # function which is run when get request is made to the URL
+        self.input = list((request.form["input"]).split(
+            " "))  # self.input = request.form["input"] # data is in JSON format. JSON file format is essentially a Python dictionary. The returned format must be 'JSON serializable' (i.e. in a valid JSON format - a dictionary)
         self.county = request.form["county"]
         print(self.input)
         data = RecyclingInfo().noun_finder(self.input)
         return data
-        
-        
+
+
 class RecyclingInfo():
     def noun_finder(self, input):
-        print(input)
         self.keywords = []
         for word in input:
-            mycursor.execute("SELECT * FROM Keywords WHERE Keyword ='%s'" % (word)) # returns all the values in the column 'Keyword' that match 'word'.
-            if len(mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
-                synonym_list = self.synonym_finder(word)
-                self.keywords.append(word)
-                self.keywords.extend(synonym_list)
-            else:
+            try:
+                mycursor.execute("SELECT * FROM Keywords WHERE Keyword ='%s'" % (
+                    word))  # returns all the values in the column 'Keyword' that match 'word'.
+                if len(
+                        mycursor.fetchall()) > 0:  # if the MySQL execution returns a value, the word is a noun and so is added to the keywords list.
+                    synonym_list = self.synonym_finder(word)
+                    self.keywords.append(word)
+                    self.keywords.extend(synonym_list)
+                else:
+                    pass
+            except:
                 pass
         return (self.get_category())
-
 
     def synonym_finder(self, word):
         self.synonym_list = []
@@ -58,13 +63,14 @@ class RecyclingInfo():
                         "text"])  # prints the synonyms returned by the api
         else:
             pass
-        
-        return self.synonym_list
 
+        return self.synonym_list
 
     def get_category(self):
         for key in self.keywords:
-            mycursor.execute("SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' LIMIT 1" % ("Dacorum", key.capitalize()))  # executes query to find the main category type of the user's item. Limit 1 ensures that the results do not flow into the next execution of the db cursor, which would cause an Unread Result Found error
+            mycursor.execute("SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' LIMIT 1" % (
+            "Dacorum",
+            key.capitalize()))  # executes query to find the main category type of the user's item. Limit 1 ensures that the results do not flow into the next execution of the db cursor, which would cause an Unread Result Found error
             if mycursor.fetchone() != None:  # if the query returns a result, this result will be stored in the variable 'self.item_type'
                 self.keywords.remove(key)
                 self.itemMainType = key
@@ -72,7 +78,7 @@ class RecyclingInfo():
         for key in self.keywords:
             mycursor.execute(
                 "SELECT * FROM Categories WHERE `County` = '%s' AND `Type-main` = '%s' AND `Type-sub` = '%s' LIMIT 1" % (
-                "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
+                    "Dacorum", self.itemMainType.capitalize(), key.capitalize()))
             result1 = mycursor.fetchone()
             if result1 != None:
                 print(result1)
@@ -88,12 +94,10 @@ class RecyclingInfo():
             if result2 != None:
                 self.extraInfo = result2[1]
         return self.extraInfo
-        
 
 
-
-
-api.add_resource(returnRecyclingInfo, "/RecyclingInfo") #adds the class 'returnNouns' to the API as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
+api.add_resource(returnRecyclingInfo,
+                 "/RecyclingInfo")  # adds the class 'returnNouns' to the API as the class is a resource. This resource is found by making a GET request to the URL followed by "/nouns"
 
 if __name__ == "__main__":  # if the name of the file is the main program (not a module imported from another file)
-    application.run(debug=True) #begins running the Api server
+    application.run(debug=True)  # begins running the Api server
