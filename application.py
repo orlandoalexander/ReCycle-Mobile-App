@@ -7,8 +7,8 @@ application = Flask(__name__)
 api = Api(application)  # wrap app in restful Api
 
 host = "aa1xyc61stz02ca.cnem9ngqo5zs.eu-west-2.rds.amazonaws.com"
-user = "orlandoalexander"
-passwd = "RecycleApp"
+user = ""
+passwd = ""
 
 mydb = mysql.connector.connect(host=host, user=user, passwd=passwd, database="ebdb")  # initialises the database
 mycursor = mydb.cursor()  # initialises a cursor which allows you to communicate with mydb (MySQL database)
